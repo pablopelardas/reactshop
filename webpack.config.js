@@ -8,7 +8,7 @@ module.exports = {
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		filename: 'bundle.js',
-		publicPath: '/',
+		publicPath: './',
 	},
 	mode: 'development',
 	resolve: {
@@ -48,6 +48,9 @@ module.exports = {
 			{
 				test: /\.(png|svg|jpg|gif)$/,
 				type: 'asset',
+				generator: {
+					filename: 'public/[hash][ext]',
+				},
 			},
 		],
 	},
@@ -61,6 +64,11 @@ module.exports = {
 		}),
 	],
 	devServer: {
+		static: {
+			directory: path.join(__dirname, 'public'),
+		},
+		compress: true,
+		port: 64340,
 		historyApiFallback: true,
 	},
 };
